@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/cardview_shadow_end_color"
+    android:layout_height="0dp"
+    tools:context=".ui.home.HomeFragment">
+
+   <include
+       android:id="@+id/include_task"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       layout="@layout/include_task_card"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_marginHorizontal="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/tvTitleProgress"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/include_task"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="In Progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/include_task"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="In Progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProgress"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleProgress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/tvTitleGroupTask"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/rvProgress"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Task Group"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/include_task"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="In Progress"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTask"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleGroupTask"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_task_group"
+        android:paddingBottom="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
