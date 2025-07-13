@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/cardview_shadow_end_color"
+    android:layout_height="wrap_content"
+    tools:context=".ui.home.HomeFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:paddingHorizontal="16dp"
+        android:minHeight="60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:weightSum="3">
+
+            <!-- Profile Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:shapeAppearanceOverlay="@style/CircularImageViewShape"
+                android:src="@drawable/ic_launcher_background" />
+
+            <!-- Texts -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:text="Hello!"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Livia Vaccaro"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Bell with badge -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+
+                <ImageView
+                    android:id="@+id/notificationBell"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_notifications_black_24dp"
+                    />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+
+                    android:layout_gravity="top|end"
+                    android:translationX="2dp"
+                    android:translationY="2dp" />
+<!--                android:background="@drawable/badge_dot"-->
+            </FrameLayout>
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <include
+        android:layout_marginTop="12dp"
+       android:id="@+id/include_task"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       layout="@layout/include_task_card"
+       app:layout_constraintTop_toBottomOf="@id/customToolbar"
+       android:layout_marginHorizontal="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/tvTitleProgress"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/include_task"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="In Progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/tvTitleProgress"
+        app:layout_constraintTop_toTopOf="@id/tvTitleProgress"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleProgress"
+        android:id="@+id/tvTitleProgressCount"
+        android:textSize="6dp"
+        android:padding="4dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:text="8"
+        android:background="@drawable/bg_circular_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProgress"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleProgress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+ <TextView
+     app:layout_constraintStart_toEndOf="@id/tvTitleGroupTask"
+     app:layout_constraintTop_toTopOf="@id/tvTitleGroupTask"
+     app:layout_constraintBottom_toBottomOf="@id/tvTitleGroupTask"
+     android:id="@+id/tvTitleTaskCount"
+     android:textSize="6dp"
+     android:padding="4dp"
+     android:layout_marginStart="16dp"
+     android:textColor="@color/black"
+     android:text="8"
+     android:background="@drawable/bg_circular_background"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvTitleGroupTask"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/rvProgress"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Task Group"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTask"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleGroupTask"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/include_task"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_task_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

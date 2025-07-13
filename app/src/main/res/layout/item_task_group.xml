@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemTask"
+            type="com.video.docquityandroidassignment.model.TaskGroup" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Icon Background -->
+            <View
+                android:id="@+id/iconBg"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <!-- Icon Image -->
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:scaleType="centerCrop"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_outline_cases"
+                app:layout_constraintStart_toStartOf="@id/iconBg"
+                app:layout_constraintEnd_toEndOf="@id/iconBg"
+                app:layout_constraintTop_toTopOf="@id/iconBg"
+                app:layout_constraintBottom_toBottomOf="@id/iconBg"
+                app:tint="@android:color/white" />
+
+            <!-- Project Title -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Office Project"
+                android:text="@{itemTask.name}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#222222"
+
+                app:layout_constraintStart_toEndOf="@id/iconBg"
+                app:layout_constraintTop_toTopOf="@id/iconBg"
+                app:layout_constraintEnd_toStartOf="@id/progressCircle"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp" />
+
+            <!-- Project SubTitle -->
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="23 Tasks"
+                android:text='@{itemTask.taskCount+" Task"}'
+                android:textSize="14sp"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvTitle" />
+
+            <!-- Circular Progress -->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressCircle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:indicatorSize="48dp"
+                app:trackThickness="6dp"
+                android:progress="@{itemTask.progress}"
+                app:indicatorDirectionCircular="clockwise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:indicatorColor="@color/teal_200"
+                app:trackColor="@color/light_pink"
+                app:trackCornerRadius="10dp"
+                android:layout_marginTop="16dp"
+                android:indeterminate="false"
+                />
+
+            <!-- Progress Percentage Text -->
+            <TextView
+                android:id="@+id/tvProgressPercent"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text='@{itemTask.progress+"%"}'
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#E91E63"
+                app:layout_constraintTop_toTopOf="@id/progressCircle"
+                app:layout_constraintBottom_toBottomOf="@id/progressCircle"
+                app:layout_constraintStart_toStartOf="@id/progressCircle"
+                app:layout_constraintEnd_toEndOf="@id/progressCircle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

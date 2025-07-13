@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FaceDetect"
+rootProject.name = "DocquityAndroidassignment"
 include(":app")
  

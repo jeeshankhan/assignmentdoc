@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">DocquityAndroidassignment</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="task_card_setting">Task Card Setting</string>
-    <string name="your_today_s_task_nalmost_done">Your today’s task\nalmost done!</string>
-</resources>
