@@ -1,6 +1,4 @@
-package com.personalLoan.loan112.api
-
-import com.video.docquityandroidassignment.api.ApiService
+package com.video.docquityandroidassignment.api
 
 
 object ApiController {

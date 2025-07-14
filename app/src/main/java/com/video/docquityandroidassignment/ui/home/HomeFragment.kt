@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.personalLoan.loan112.api.ApiController
+import com.video.docquityandroidassignment.api.ApiController
 import com.video.docquityandroidassignment.R
 import com.video.docquityandroidassignment.base.BaseAdapterBinding
 import com.video.docquityandroidassignment.base.BaseAdapterBindingTwo
@@ -24,14 +24,17 @@ import com.video.docquityandroidassignment.model.TodayTaskSummary
 import com.video.docquityandroidassignment.model.User
 import com.video.docquityandroidassignment.ui.home.HomeFragment.MockDashboard.dashboardResponse
 import com.video.docquityandroidassignment.ui.utils.ApiState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(),BaseAdapterBinding.BindAdapterListener,BaseAdapterBindingTwo.BindAdapterListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var baseAdapter:BaseAdapterBinding<InProgressTask>
     private lateinit var baseAdapterTwo:BaseAdapterBindingTwo<TaskGroup>
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
+
 
 
     override fun onCreateView(
@@ -41,8 +44,6 @@ class HomeFragment : Fragment(),BaseAdapterBinding.BindAdapterListener,BaseAdapt
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        homeViewModel.text.observe(viewLifecycleOwner) {
-        }
         return root
     }
 
@@ -105,7 +106,14 @@ class HomeFragment : Fragment(),BaseAdapterBinding.BindAdapterListener,BaseAdapt
                         color = "#FF9B6A",
                         bColor= "#6AFDCBFF",
                         iconUrl = "https://yourserver.com/icons/personal_project.png"
-                    )
+                    ), InProgressTask(
+                        projectType = "Office Project",
+                        taskTitle = "Grocery shopping app design",
+                        progress = 70,
+                        color = "#4BFFF2",
+                        bColor= "#2C4FFFF2",
+                        iconUrl = "https://yourserver.com/icons/office_project.png"
+                    ),
                 )
             ),
             taskGroups = TaskGroupsSection(
@@ -141,34 +149,24 @@ class HomeFragment : Fragment(),BaseAdapterBinding.BindAdapterListener,BaseAdapt
     }
 
 
+
+
+
+
+
+
     private fun setParamDashBoard(){
-        homeViewModel.getMaritalStatus( api = ApiController.getApi())
+        viewModel.getDashboardDetails()
         setupObserver()
+
     }
 
-    private fun setupObserver(): Unit = with(homeViewModel) {
-        getDashLiveData.observe(this@HomeFragment) { state ->
+    private fun setupObserver() {
+        viewModel.getDashLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is ApiState.Loading -> {
-//                    showLoading()
-                    Log.d("tag", "Loading")
-                }
-                is ApiState.Success -> {
-
-//                    hideLoading()
-                    Log.d("tag", "Successes")
-
-                }
-                is ApiState.Error -> {
-//                    hideLoading()
-//                    showError("something went wrong",binding.root)
-                    Log.d("tag", "Error")
-                }
-                else -> {
-                    Log.d("tag", "Default")
-//                    hideLoading()
-//                    showError("something went wrong",binding.root)
-                }
+                is ApiState.Loading -> { /* show loading */ }
+                is ApiState.Success -> { /* update UI with state.data */ }
+                is ApiState.Error -> { /* show error */ }
             }
         }
     }
@@ -220,7 +218,7 @@ class HomeFragment : Fragment(),BaseAdapterBinding.BindAdapterListener,BaseAdapt
             try {
                 val colorInt = baseAdapter.getItem(position).color.toColorInt()
                 progressCircle.setIndicatorColor(colorInt)
-//                card.setCardBackgroundColor(baseAdapter.getItem(position).bColor.toColorInt())
+                card.setCardBackgroundColor(baseAdapter.getItem(position).bColor.toColorInt())
             } catch (_: Exception) {
             }
 

@@ -1,8 +1,12 @@
 package com.video.docquityandroidassignment.api
 
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object HomeRepository {
 
-    suspend fun getDhashDetails( api: ApiService) = api.getDashDetails()
-
+@Singleton
+class HomeRepository @Inject constructor(
+    private val apiService: ApiService
+) {
+    suspend fun getDashDetails() = apiService.getDashDetails()
 }

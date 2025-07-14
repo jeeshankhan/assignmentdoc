@@ -9,42 +9,30 @@ import com.video.docquityandroidassignment.api.ApiService
 import com.video.docquityandroidassignment.api.HomeRepository
 import com.video.docquityandroidassignment.model.DashboardResponse
 import com.video.docquityandroidassignment.ui.utils.ApiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: HomeRepository
+) : ViewModel() {
 
     private val _getDashResponse = MutableLiveData<ApiState<DashboardResponse>>()
     val getDashLiveData: LiveData<ApiState<DashboardResponse>> = _getDashResponse
 
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
-    fun getMaritalStatus( api: ApiService) {
+    fun getDashboardDetails() {
         _getDashResponse.value = ApiState.loading()
         viewModelScope.launch {
             try {
-                val res = HomeRepository.getDhashDetails( api = api)
+                val res = repository.getDashDetails()
                 if (res.status) {
-                    Log.d("tag", "area: $res")
                     _getDashResponse.postValue(ApiState.success(res))
                 } else {
-                    _getDashResponse.postValue(
-                        ApiState.error(
-                            res.message ?: "Something went wrong"
-                        )
-                    )
+                    _getDashResponse.postValue(ApiState.error(res.message ?: "Something went wrong"))
                 }
             } catch (e: Exception) {
-                Log.d("tag", "exp: $e")
-                _getDashResponse.postValue(
-                    ApiState.error(
-                        e.localizedMessage ?: "Something went wrong"
-                    )
-                )
+                _getDashResponse.postValue(ApiState.error(e.localizedMessage ?: "Something went wrong"))
             }
         }
     }
